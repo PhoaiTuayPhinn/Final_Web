@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FitMeal Admin - Customers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/customer.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">FitMeal Admin</div>
+      <nav class="nav">
+        <a class="nav-link" href="../../Order/html/order.html"><span class="nav-icon">🧾</span>Orders</a>
+        <a class="nav-link" href="../../Product/html/product.html"><span class="nav-icon">🏷️</span>Products</a>
+        <a class="nav-link active" href="customer.html"><span class="nav-icon">👤</span>Customers</a>
+        <a class="nav-link" href="../../Discount/html/discount.html"><span class="nav-icon">🎁</span>Promotions</a>
+        <a class="nav-link" href="../../Report/html/report.html"><span class="nav-icon">📊</span>Reports</a>
+      </nav>
+    </aside>
+
+    <main class="layout">
+      <header class="page-header" id="list-header">
+        <div>
+          <p class="page-meta">Total customers: <strong id="total-customers">438</strong></p>
+          <h1>Customer Directory</h1>
+        </div>
+        <div class="header-actions">
+          <button class="btn ghost" type="button">Import Data</button>
+          <button class="btn ghost" type="button">Export Data</button>
+          <button class="btn primary" type="button"><span>➕</span>Create Customer</button>
+        </div>
+      </header>
+
+      <header class="page-header detail-header-bar" id="detail-header" hidden>
+        <div class="header-left">
+          <button class="btn ghost icon" type="button" id="detail-back" aria-label="Back to list">←</button>
+          <div>
+            <p class="page-meta">Customer</p>
+            <h1 id="detail-title">Customer Detail</h1>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="btn ghost" type="button">Export</button>
+          <button class="btn primary" type="button">Create Order</button>
+        </div>
+      </header>
+
+      <section class="panel list-panel" id="customer-list-view">
+        <div class="panel-tabs" role="tablist">
+          <button class="tab active" type="button" data-filter="all">All Customers</button>
+          <button class="tab" type="button" data-filter="vip">VIP</button>
+          <button class="tab" type="button" data-filter="loyal">Loyal</button>
+          <button class="tab" type="button" data-filter="inactive">Inactive</button>
+        </div>
+
+        <div class="panel-toolbar">
+          <div class="toolbar-actions">
+            <button class="btn soft" type="button" data-action="filter">+ Filter</button>
+            <button class="btn soft" type="button" data-action="segment">Save Segment</button>
+          </div>
+          <label class="search">
+            <input type="search" id="search-input" placeholder="Search by name, phone, or email..." />
+            <span class="search-icon">🔍</span>
+          </label>
+          <div class="view-toggle">
+            <button class="btn icon" type="button" title="Grid view">▦</button>
+            <button class="btn icon active" type="button" title="List view">☰</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="customer-table">
+            <thead>
+              <tr>
+                <th class="checkbox-col">
+                  <input type="checkbox" id="select-all" aria-label="Select all customers" />
+                </th>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Default Address</th>
+                <th>Latest Order</th>
+                <th>Orders</th>
+                <th>Balance</th>
+                <th>Total Spend</th>
+              </tr>
+            </thead>
+            <tbody id="customer-tbody"></tbody>
+          </table>
+          <p class="table-summary" id="table-summary">Showing 0 customers</p>
+          <div class="empty-state" id="empty-state" hidden>
+            <div class="empty-icon">🔍</div>
+            <p class="empty-title">No customers match your filters</p>
+            <p class="empty-sub">Adjust your search keywords or clear the active filters to see results.</p>
+            <button class="btn primary" type="button" id="clear-filters">Clear Filters</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="detail-panel detail-panel--full" id="customer-detail-view" hidden>
+        <div class="detail" id="detail-view">
+          <header class="detail-header">
+            <div class="detail-avatar" id="detail-avatar">HD</div>
+            <div class="detail-heading">
+              <h2 id="detail-name">Ngô Viết Thanh</h2>
+              <p id="detail-email">ngozthanh@gmail.com</p>
+              <div class="detail-tags" id="detail-tags"></div>
+            </div>
+            <button class="btn ghost" type="button">Actions ▾</button>
+          </header>
+
+          <div class="detail-body">
+            <section class="card overview-card">
+              <div class="overview-grid">
+                <div class="overview-item">
+                  <p class="label">Relationship</p>
+                  <p class="value" id="detail-since">17/10/2025</p>
+                  <p class="muted" id="detail-loyalty">16 months with FitMeal</p>
+                </div>
+                <div class="overview-item">
+                  <p class="label">Orders</p>
+                  <p class="value" id="detail-orders">33</p>
+                  <p class="muted" id="detail-orders-recent">3 in the last 30 days</p>
+                </div>
+                <div class="overview-item">
+                  <p class="label">Lifetime spend</p>
+                  <p class="value" id="detail-total">107,763,000 đ</p>
+                  <p class="muted" id="detail-average">Avg. 3,265,545 đ / order</p>
+                </div>
+                <div class="overview-item">
+                  <p class="label">Balance</p>
+                  <p class="value negative" id="detail-balance">-107,543,000 đ</p>
+                  <p class="muted" id="detail-balance-note">Pending repayment</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="card orders-card">
+              <div class="card-header">
+                <div>
+                  <h3>Recent Orders</h3>
+                  <p class="muted">Last updated <span id="detail-updated">16 minutes ago</span></p>
+                </div>
+                <a class="link" href="#">View all</a>
+              </div>
+              <ul class="orders-list" id="detail-orders-list"></ul>
+            </section>
+
+            <section class="card history-card">
+              <div class="card-header">
+                <h3>Timeline</h3>
+              </div>
+              <div class="history-feed" id="detail-history"></div>
+              <div class="history-input">
+                <div class="avatar small" id="detail-owner-avatar">VT</div>
+                <input type="text" placeholder="Add a note..." />
+                <button class="btn primary" type="button">Post</button>
+              </div>
+            </section>
+          </div>
+
+          <aside class="detail-side">
+            <section class="card contact-card">
+              <div class="card-header">
+                <h3>Contact Info</h3>
+              </div>
+              <dl class="info-list">
+                <div>
+                  <dt>Email</dt>
+                  <dd id="detail-contact-email">ngozthanh@gmail.com</dd>
+                </div>
+                <div>
+                  <dt>Phone</dt>
+                  <dd id="detail-phone">0378603430</dd>
+                </div>
+                <div>
+                  <dt>Address</dt>
+                  <dd id="detail-address">Bcons Green Topaz Apartment, Dong Hoa, Di An, TP.HCM</dd>
+                </div>
+                <div>
+                  <dt>Tax info</dt>
+                  <dd id="detail-tax">N/A</dd>
+                </div>
+              </dl>
+            </section>
+
+            <section class="card rating-card">
+              <div class="card-header">
+                <h3>Latest review</h3>
+                <button class="btn soft" type="button">Upgrade</button>
+              </div>
+              <div class="rating-stars" id="detail-rating"></div>
+              <p class="muted" id="detail-rating-note">Discover premium perks for loyal customers.</p>
+            </section>
+
+            <section class="card actions-card">
+              <div class="card-header">
+                <h3>Customer group</h3>
+              </div>
+              <div class="field">
+                <label for="group-select">Assign group</label>
+                <div class="select-field">
+                  <select id="group-select">
+                    <option value="">Select group</option>
+                    <option value="vip">VIP</option>
+                    <option value="loyal">Loyal</option>
+                    <option value="new">New</option>
+                  </select>
+                  <span class="select-arrow">v</span>
+                </div>
+                <button class="btn ghost" type="button" id="save-group">Save</button>
+                <p class="field-note" id="group-feedback" hidden>Group updated.</p>
+              </div>
+
+              <div class="field">
+                <label for="note-field">Note</label>
+                <textarea id="note-field" rows="3" placeholder="Add a note..."></textarea>
+                <button class="btn ghost" type="button">Save note</button>
+              </div>
+
+              <div class="field">
+                <label for="tag-field">Tags</label>
+                <input id="tag-field" type="text" placeholder="Search or add tags" />
+                <div class="tag-cloud" id="detail-tags-cloud"></div>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../js/customer.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FitMeal Admin - Reports</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/report.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">FitMeal Admin</div>
+      <nav class="nav">
+        <a class="nav-link" href="../../Order/html/order.html"><span class="nav-icon">🧾</span>Orders</a>
+        <a class="nav-link" href="../../Product/html/product.html"><span class="nav-icon">🏷️</span>Products</a>
+        <a class="nav-link" href="../../Customer/html/customer.html"><span class="nav-icon">👤</span>Customers</a>
+        <a class="nav-link" href="../../Discount/html/discount.html"><span class="nav-icon">🎁</span>Promotions</a>
+        <a class="nav-link active" href="report.html"><span class="nav-icon">📊</span>Reports</a>
+      </nav>
+    </aside>
+
+    <main class="layout">
+      <header class="page-header">
+        <div class="header-title">
+          <button class="btn ghost icon-only" type="button" aria-label="Back">←</button>
+          <div>
+            <p class="page-meta">Dashboard</p>
+            <h1>Performance Report</h1>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="btn" type="button">Print</button>
+          <button class="btn" type="button">Export</button>
+          <button class="btn" type="button">Duplicate</button>
+        </div>
+      </header>
+
+      <section class="controls">
+        <div class="control-group">
+          <label class="control-label" for="report-range">Date Range</label>
+          <div class="select-wrap">
+            <select id="report-range">
+              <option value="this-month">This month</option>
+              <option value="last-month">Last month</option>
+              <option value="this-quarter">This quarter</option>
+              <option value="this-year">This year</option>
+            </select>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="comparison-range">Compare to</label>
+          <div class="select-wrap">
+            <select id="comparison-range">
+              <option value="previous-period">Previous period</option>
+              <option value="previous-year">Same period last year</option>
+              <option value="none">No comparison</option>
+            </select>
+          </div>
+        </div>
+        <div class="spacer"></div>
+        <button class="btn soft" type="button" id="open-filter">☰ Filters</button>
+      </section>
+
+      <section class="chart-card">
+        <header class="card-header">
+          <h2>Net Revenue</h2>
+          <div class="legend">
+            <span class="legend-item">
+              <span class="legend-color"></span>
+              <span id="legend-label">01/10/2025 - 31/10/2025</span>
+            </span>
+          </div>
+        </header>
+        <div class="chart-wrap">
+          <canvas id="report-chart" aria-label="Net revenue chart" role="img"></canvas>
+        </div>
+      </section>
+
+      <section class="table-card">
+        <header class="card-header">
+          <div class="filter-tags" id="filter-tags">
+            <button class="tag" data-filter="status">
+              Order status is not Cancelled
+              <span class="tag-remove" aria-hidden="true">×</span>
+            </button>
+          </div>
+          <button class="btn icon" type="button" id="column-picker">▤ Column Picker</button>
+        </header>
+
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th data-sort="date">Date <span class="sort-indicator">↕</span></th>
+                <th data-sort="orders">Orders <span class="sort-indicator">↕</span></th>
+                <th data-sort="revenue">Revenue <span class="sort-indicator">↕</span></th>
+                <th data-sort="discount">Discounts <span class="sort-indicator">↕</span></th>
+                <th data-sort="net">Net Revenue <span class="sort-indicator">↕</span></th>
+                <th data-sort="shipping">Shipping <span class="sort-indicator">↕</span></th>
+                <th data-sort="shippingDiscount">Shipping Discount <span class="sort-indicator">↕</span></th>
+                <th data-sort="total">Invoice Total <span class="sort-indicator">↕</span></th>
+                <th data-sort="paid">Paid <span class="sort-indicator">↕</span></th>
+              </tr>
+            </thead>
+            <tbody id="report-body">
+              <!-- Rows will be rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../js/report.js"></script>
+</body>
+</html>

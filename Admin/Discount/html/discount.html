@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FitMeal Admin - Promotions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/discount.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">FitMeal Admin</div>
+      <nav class="nav">
+        <a class="nav-link" href="../../Order/html/order.html"><span class="nav-icon">🧾</span>Orders</a>
+        <a class="nav-link" href="../../Product/html/product.html"><span class="nav-icon">🏷️</span>Products</a>
+        <a class="nav-link" href="../../Customer/html/customer.html"><span class="nav-icon">👤</span>Customers</a>
+        <a class="nav-link active" href="discount.html"><span class="nav-icon">🎁</span>Promotions</a>
+        <a class="nav-link" href="../../Report/html/report.html"><span class="nav-icon">📊</span>Reports</a>
+      </nav>
+    </aside>
+
+    <main class="layout">
+      <div class="page-header">
+        <div>
+          <p class="page-meta">Campaign</p>
+          <h1>Create Promotion</h1>
+        </div>
+        <div class="page-actions">
+          <button class="btn ghost" type="button">Cancel</button>
+          <button class="btn primary" type="button">Save Promotion</button>
+        </div>
+      </div>
+
+      <div class="content">
+        <form class="form-panel" id="discount-form">
+          <section class="card">
+            <h2>General Information</h2>
+            <div class="field">
+              <label for="discount-name">Promotion Name</label>
+              <input type="text" id="discount-name" name="name" placeholder="Enter promotion name" />
+            </div>
+            <div class="field">
+              <label for="discount-description">Description</label>
+              <textarea id="discount-description" name="description" rows="3" placeholder="Briefly describe the promotion"></textarea>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>Effective Period</h2>
+            <div class="field-group">
+              <div class="field">
+                <label for="start-time">Start Time</label>
+                <input type="datetime-local" id="start-time" name="start" />
+              </div>
+              <div class="field checkbox-field">
+                <label class="checkbox">
+                  <input type="checkbox" id="has-end-time" checked />
+                  <span>Has end time</span>
+                </label>
+              </div>
+              <div class="field">
+                <label for="end-time">End Time</label>
+                <input type="datetime-local" id="end-time" name="end" />
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>Promotion Type</h2>
+            <div class="field">
+              <label for="discount-type">Type</label>
+              <div class="input-with-icon">
+                <span class="input-icon">🏷️</span>
+                <select id="discount-type" name="type">
+                  <option value="product">Product discount</option>
+                  <option value="order">Order discount</option>
+                  <option value="shipping">Shipping fee discount</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="discount-scope">Applies To</label>
+              <select id="discount-scope" name="scope">
+                <option value="all-channels">All sales channels</option>
+                <option value="online">Online channel</option>
+                <option value="store">In-store</option>
+              </select>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>Discount</h2>
+            <div class="field-group">
+              <div class="field">
+                <label for="discount-value">Amount</label>
+                <div class="input-suffix">
+                  <input type="number" min="0" id="discount-value" name="value" placeholder="0" />
+                  <span class="suffix" id="value-suffix">₫</span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="discount-unit">Unit</label>
+                <select id="discount-unit" name="unit">
+                  <option value="amount" selected>VND</option>
+                  <option value="percent">%</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="discount-limit">Value Cap (optional)</label>
+              <input type="number" min="0" id="discount-limit" name="limit" placeholder="Enter a cap value" />
+            </div>
+          </section>
+        </form>
+
+        <aside class="summary-panel" aria-live="polite">
+          <div class="summary-card">
+            <h2>Summary</h2>
+            <div class="summary-section">
+              <p class="summary-title" id="summary-title">Untitled</p>
+              <p class="summary-description" id="summary-description">Enter a description to show here.</p>
+            </div>
+            <div class="summary-section">
+              <h3>Type & Scope</h3>
+              <p id="summary-type">Product discount</p>
+              <p id="summary-scope">Applies to all sales channels</p>
+            </div>
+            <div class="summary-section">
+              <h3>Details</h3>
+              <p id="summary-value">Discount 0 ₫</p>
+              <p id="summary-limit">No value cap</p>
+            </div>
+            <div class="summary-section">
+              <h3>Limits</h3>
+              <ul>
+                <li>No usage limit</li>
+                <li>No customer restrictions</li>
+                <li id="summary-time">Time not set</li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/discount.js"></script>
+</body>
+</html>

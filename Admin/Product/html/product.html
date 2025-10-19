@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FitMeal Admin - Products</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/product.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">FitMeal Admin</div>
+      <nav class="nav">
+        <a class="nav-link" href="../../Order/html/order.html"><span class="nav-icon">🧾</span>Orders</a>
+        <a class="nav-link active" href="product.html"><span class="nav-icon">🏷️</span>Products</a>
+        <a class="nav-link" href="../../Customer/html/customer.html"><span class="nav-icon">👤</span>Customers</a>
+        <a class="nav-link" href="../../Discount/html/discount.html"><span class="nav-icon">🎁</span>Promotions</a>
+        <a class="nav-link" href="../../Report/html/report.html"><span class="nav-icon">📊</span>Reports</a>
+      </nav>
+    </aside>
+
+    <main class="layout">
+      <div class="page-header">
+        <div>
+          <p class="page-meta">Total products: <strong>8</strong></p>
+          <h1>Product List</h1>
+        </div>
+        <div class="header-actions">
+          <button class="btn ghost" type="button">Import Data</button>
+          <button class="btn ghost" type="button">Export Data</button>
+          <button class="btn primary" type="button"><span>➕</span>Create Product</button>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="panel">
+          <div class="panel-tabs" role="tablist">
+            <button class="tab active" type="button" data-filter="all">All Products</button>
+            <button class="tab" type="button" data-filter="active">Active</button>
+            <button class="tab" type="button" data-filter="draft">Draft</button>
+            <button class="tab" type="button" data-filter="archive">Archived</button>
+          </div>
+
+          <div class="panel-toolbar">
+            <button class="btn soft" type="button" data-action="filter">+ Add Filter Condition</button>
+            <label class="search">
+              <input type="search" id="search-input" placeholder="Search products..." />
+              <span class="search-icon">🔍</span>
+            </label>
+            <button class="btn icon" type="button" title="Grid View">▦</button>
+            <button class="btn icon" type="button" title="List View">☰</button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="product-table">
+              <thead>
+                <tr>
+                  <th class="checkbox-col">
+                    <input type="checkbox" id="select-all" aria-label="Select all" />
+                  </th>
+                  <th class="product-main">Product Name</th>
+                  <th>Category</th>
+                  <th>Group</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="product-tbody">
+                <tr
+                  class="product-row"
+                  data-status="active"
+                  data-name="Grilled Beef with Sweet Potatoes"
+                  data-meta="274 kcal"
+                  data-category="Fit Meal"
+                  data-group="Main Menu"
+                  data-price="75,000 ₫"
+                  data-protein="32"
+                  data-carbs="38"
+                  data-fat="14"
+                  data-description="Tender grilled beef marinated in FitMeal’s signature sauce, served with honey-roasted sweet potatoes and mixed vegetables for a balanced, protein-rich meal."
+                  data-image="../images/bo_nuong_khoai_lang.png"
+                  data-gallery="../images/bokhoailang1.png|../images/bokhoailang2.png"
+                  data-status-label="Active"
+                >
+                  <td><input type="checkbox" /></td>
+                  <td class="product-cell">
+                    <div class="product-info">
+                      <img src="../images/bo_nuong_khoai_lang.png" alt="Grilled Beef with Sweet Potatoes" />
+                      <div>
+                        <p class="product-name">Grilled Beef with Sweet Potatoes</p>
+                        <p class="product-sub">274 kcal • P 32g / C 38g / F 14g</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Fit Meal</td>
+                  <td>Main Menu</td>
+                  <td class="money">75,000 ₫</td>
+                  <td><span class="status-pill available">Active</span></td>
+                </tr>
+
+                <tr
+                  class="product-row"
+                  data-status="active"
+                  data-name="Salmon with Steamed Vegetables"
+                  data-meta="320 kcal"
+                  data-category="Fit Meal"
+                  data-group="Main Menu"
+                  data-price="85,000 ₫"
+                  data-protein="28"
+                  data-carbs="24"
+                  data-fat="12"
+                  data-description="Pan-seared salmon served with steamed green vegetables, providing omega-3s and dietary fiber."
+                  data-image="../images/ca_hoi_rau_cu.png"
+                  data-gallery="../images/cahoiraucu1.png|../images/cahoiraucu2.png"
+                  data-status-label="Active"
+                >
+                  <td><input type="checkbox" /></td>
+                  <td class="product-cell">
+                    <div class="product-info">
+                      <img src="../images/ca_hoi_rau_cu.png" alt="Salmon with Steamed Vegetables" />
+                      <div>
+                        <p class="product-name">Salmon with Steamed Vegetables</p>
+                        <p class="product-sub">320 kcal • P 28g / C 24g / F 12g</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Fit Meal</td>
+                  <td>Main Menu</td>
+                  <td class="money">85,000 ₫</td>
+                  <td><span class="status-pill available">Active</span></td>
+                </tr>
+
+                <tr
+                  class="product-row"
+                  data-status="active"
+                  data-name="Japanese Shrimp Noodles"
+                  data-meta="341 kcal"
+                  data-category="Fit Meal"
+                  data-group="Main Menu"
+                  data-price="80,000 ₫"
+                  data-protein="27"
+                  data-carbs="45"
+                  data-fat="9"
+                  data-description="Buckwheat noodles with fresh shrimp in a light teriyaki sauce, balancing lean protein and complex carbs."
+                  data-image="../images/mi_tom_Nhat.png"
+                  data-gallery="../images/mytomnhat1.png|../images/mytomnhat2.png"
+                  data-status-label="Active"
+                >
+                  <td><input type="checkbox" /></td>
+                  <td class="product-cell">
+                    <div class="product-info">
+                      <img src="../images/mi_tom_Nhat.png" alt="Japanese Shrimp Noodles" />
+                      <div>
+                        <p class="product-name">Japanese Shrimp Noodles</p>
+                        <p class="product-sub">341 kcal • P 27g / C 45g / F 9g</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Fit Meal</td>
+                  <td>Main Menu</td>
+                  <td class="money">80,000 ₫</td>
+                  <td><span class="status-pill available">Active</span></td>
+                </tr>
+
+                <tr
+                  class="product-row"
+                  data-status="active"
+                  data-name="Chicken Breast with Potatoes"
+                  data-meta="285 kcal"
+                  data-category="Fit Meal"
+                  data-group="Main Menu"
+                  data-price="70,000 ₫"
+                  data-protein="30"
+                  data-carbs="26"
+                  data-fat="8"
+                  data-description="Pan-seared chicken breast with black pepper sauce, served with roasted potatoes and bok choy — a lean, low-fat source of protein."
+                  data-image="../images/uc_ga_khoai_tay.png"
+                  data-gallery="../images/ucgakhoaitay1.png|../images/uckhoaitay2.png"
+                  data-status-label="Active"
+                >
+                  <td><input type="checkbox" /></td>
+                  <td class="product-cell">
+                    <div class="product-info">
+                      <img src="../images/uc_ga_khoai_tay.png" alt="Chicken Breast with Potatoes" />
+                      <div>
+                        <p class="product-name">Chicken Breast with Potatoes</p>
+                        <p class="product-sub">285 kcal • P 30g / C 26g / F 8g</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Fit Meal</td>
+                  <td>Main Menu</td>
+                  <td class="money">70,000 ₫</td>
+                  <td><span class="status-pill available">Active</span></td>
+                </tr>
+
+                <tr
+                  class="product-row"
+                  data-status="active"
+                  data-name="Cajun Chicken Noodles"
+                  data-meta="351 kcal"
+                  data-category="Fit Meal"
+                  data-group="Main Menu"
+                  data-price="78,000 ₫"
+                  data-protein="31"
+                  data-carbs="43"
+                  data-fat="10"
+                  data-description="Whole-wheat noodles with pan-seared chicken in a mildly spicy Cajun sauce and roasted vegetables — an energizing lunch."
+                  data-image="../images/mi_ga_sot_cajun.png"
+                  data-gallery="../images/mygacajun1.png|../images/mygacajun2.png"
+                  data-status-label="Active"
+                >
+                  <td><input type="checkbox" /></td>
+                  <td class="product-cell">
+                    <div class="product-info">
+                      <img src="../images/mi_ga_sot_cajun.png" alt="Cajun Chicken Noodles" />
+                      <div>
+                        <p class="product-name">Cajun Chicken Noodles</p>
+                        <p class="product-sub">351 kcal • P 31g / C 43g / F 10g</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Fit Meal</td>
+                  <td>Main Menu</td>
+                  <td class="money">78,000 ₫</td>
+                  <td><span class="status-pill available">Active</span></td>
+                </tr>
+
+                <tr
+                  class="product-row"
+                  data-status="active"
+                  data-name="Tuna with Corn and Potatoes"
+                  data-meta="311 kcal"
+                  data-category="Fit Meal"
+                  data-group="Main Menu"
+                  data-price="75,000 ₫"
+                  data-protein="29"
+                  data-carbs="35"
+                  data-fat="9"
+                  data-description="Seared tuna served with potatoes, corn, and peas — adding lean protein and slow-release carbs."
+                  data-image="../images/ca_ngu_khoai_bap.png"
+                  data-gallery="../images/cangubapkhoai1.png|../images/cangubapkhoai2.png"
+                  data-status-label="Active"
+                >
+                  <td><input type="checkbox" /></td>
+                  <td class="product-cell">
+                    <div class="product-info">
+                      <img src="../images/ca_ngu_khoai_bap.png" alt="Tuna with Corn and Potatoes" />
+                      <div>
+                        <p class="product-name">Tuna with Corn and Potatoes</p>
+                        <p class="product-sub">311 kcal • P 29g / C 35g / F 9g</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Fit Meal</td>
+                  <td>Main Menu</td>
+                  <td class="money">75,000 ₫</td>
+                  <td><span class="status-pill available">Active</span></td>
+                </tr>
+
+                <tr
+                  class="product-row"
+                  data-status="active"
+                  data-name="Cajun Chicken with Beetroot"
+                  data-meta="373 kcal"
+                  data-category="Fit Meal"
+                  data-group="Main Menu"
+                  data-price="75,000 ₫"
+                  data-protein="33"
+                  data-carbs="36"
+                  data-fat="11"
+                  data-description="Pan-seared chicken breast with a mild Cajun sauce, served with brown rice, roasted beetroot, and cherry tomatoes — lean protein with fiber and vitamins."
+                  data-image="../images/ga_sot_cajun_cu_den.png"
+                  data-gallery="../images/mycajuncuden1.png"
+                  data-status-label="Active"
+                >
+                  <td><input type="checkbox" /></td>
+                  <td class="product-cell">
+                    <div class="product-info">
+                      <img src="../images/ga_sot_cajun_cu_den.png" alt="Cajun Chicken with Beetroot" />
+                      <div>
+                        <p class="product-name">Cajun Chicken with Beetroot</p>
+                        <p class="product-sub">373 kcal • P 33g / C 36g / F 11g</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Fit Meal</td>
+                  <td>Main Menu</td>
+                  <td class="money">75,000 ₫</td>
+                  <td><span class="status-pill available">Active</span></td>
+                </tr>
+
+                <tr
+                  class="product-row"
+                  data-status="active"
+                  data-name="Basa Fish Noodles"
+                  data-meta="439 kcal"
+                  data-category="Fit Meal"
+                  data-group="Main Menu"
+                  data-price="70,000 ₫"
+                  data-protein="26"
+                  data-carbs="48"
+                  data-fat="13"
+                  data-description="Pan-seared basa with a light honey glaze, served with soba noodles and mashed avocado — balancing healthy fats and quality protein."
+                  data-image="../images/mi_ca_basa.png"
+                  data-gallery="../images/mycabasa1.png|../images/mycabasa2.png"
+                  data-status-label="Active"
+                >
+                  <td><input type="checkbox" /></td>
+                  <td class="product-cell">
+                    <div class="product-info">
+                      <img src="../images/mi_ca_basa.png" alt="Basa Fish Noodles" />
+                      <div>
+                        <p class="product-name">Basa Fish Noodles</p>
+                        <p class="product-sub">439 kcal • P 26g / C 48g / F 13g</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Fit Meal</td>
+                  <td>Main Menu</td>
+                  <td class="money">70,000 ₫</td>
+                  <td><span class="status-pill available">Active</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="detail-panel" id="detail-panel">
+          <p class="detail-placeholder">Click on a product to view details.</p>
+          <div class="detail" hidden>
+            <header class="detail-header">
+              <div class="detail-thumb">
+                <img src="" alt="" id="detail-image" />
+              </div>
+              <div>
+                <div class="detail-status">
+                  <span class="status-pill" id="detail-status"></span>
+                </div>
+                <h2 id="detail-name"></h2>
+                <p class="detail-meta" id="detail-meta"></p>
+              </div>
+            </header>
+
+            <div class="detail-body">
+              <section>
+                <h3>General Information</h3>
+                <dl>
+                  <div>
+                    <dt>Product Type</dt>
+                    <dd id="detail-category"></dd>
+                  </div>
+                  <div>
+                    <dt>Product Group</dt>
+                    <dd id="detail-group"></dd>
+                  </div>
+                  <div>
+                    <dt>Price</dt>
+                    <dd id="detail-price"></dd>
+                  </div>
+                </dl>
+              </section>
+
+              <section>
+                <h3>Product Description</h3>
+                <p id="detail-description"></p>
+              </section>
+
+              <section class="nutrition-section">
+                <h3>Nutrition Facts (per serving)</h3>
+                <div class="nutrition-grid">
+                  <div class="nutrition-card">
+                    <span class="label">Protein</span>
+                    <strong id="detail-protein"></strong>
+                  </div>
+                  <div class="nutrition-card">
+                    <span class="label">Carbs</span>
+                    <strong id="detail-carbs"></strong>
+                  </div>
+                  <div class="nutrition-card">
+                    <span class="label">Fat</span>
+                    <strong id="detail-fat"></strong>
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <h3>Product Images</h3>
+                <div class="detail-gallery" id="detail-gallery"></div>
+              </section>
+            </div>
+
+            <footer class="detail-footer">
+              <button class="btn danger" type="button">Delete</button>
+              <div class="spacer"></div>
+              <button class="btn soft" type="button">Add Image</button>
+              <button class="btn primary" type="button">Update</button>
+            </footer>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/product.js"></script>
+</body>
+</html>

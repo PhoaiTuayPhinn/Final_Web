@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FitMeal Admin - Orders</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/order.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">FitMeal Admin</div>
+      <nav class="nav">
+        <a class="nav-link active" href="order.html"><span class="nav-icon">🧾</span>Orders</a>
+        <a class="nav-link" href="../../Product/html/product.html"><span class="nav-icon">🏷️</span>Products</a>
+        <a class="nav-link" href="../../Customer/html/customer.html"><span class="nav-icon">👤</span>Customers</a>
+        <a class="nav-link" href="../../Discount/html/discount.html"><span class="nav-icon">🎁</span>Discounts</a>
+        <a class="nav-link" href="../../Report/html/report.html"><span class="nav-icon">📊</span>Reports</a>
+      </nav>
+    </aside>
+
+      <main>
+        <div class="container">
+          <div class="page-title">
+            <h2>List of Orders</h2>
+          </div>
+
+          <!-- Tabs -->
+          <div class="tabs">
+            <div class="tab active">All Orders</div>
+            <div class="tab">Undelivered</div>
+            <div class="tab">Pending Payment</div>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="toolbar">
+            <button class="btn">☰ Filter</button>
+            <div class="search"><input placeholder="Search"/></div>
+            <button class="btn icon" title="Grid">▦</button>
+            <button class="btn icon" title="List">☰</button>
+          </div>
+
+          <!-- Orders table (card) -->
+          <section class="card">
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>ID</th>
+                  <th>Date Created</th>
+                  <th>Customer</th>
+                  <th>Payment</th>
+                  <th>Fulfillment</th>
+                  <th>COD</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Row 1 (expanded) -->
+                <tr class="order-row is-open">
+                  <td class="row-toggle" data-expanded="true">▾</td>
+                  <td><a href="#10032">#10032</a></td>
+                  <td>09/10/2025 08:58 CH</td>
+                  <td>Ngô Viết Thanh</td>
+                  <td><span class="pill paid">Paid</span></td>
+                  <td><span class="pill pending">Unfulfilled</span></td>
+                  <td></td>
+                  <td>19</td>
+                  <td class="money">1,375,000 đ</td>
+                </tr>
+                <!-- Expanded content row -->
+                <tr class="order-details is-open">
+                  <td></td>
+                  <td colspan="8">
+                    <div class="shipping-wrap">
+                      <div>
+                        <div class="order-item">
+                          <div class="avatar"><img src="../../Product/images/uc_ga_khoai_tay.png" alt="Chicken Breast with Potatoes"></div>
+                          <div class="order-item-content">
+                            <a class="order-item-title" href="#">Chicken Breast with Potatoes</a>
+                            <div class="order-item-meta">x 5 • 70,000 đ</div>
+                            <div class="order-item-macros">Protein 30g • Carbs 26g • Fat 8g</div>
+                            <div class="order-item-total">Total : <span class="money">350,000 đ</span></div>
+                          </div>
+                        </div>
+                        <div class="order-item">
+                          <div class="avatar"><img src="../../Product/images/bo_nuong_khoai_lang.png" alt="Grilled Beef with Sweet Potatoes"></div>
+                          <div class="order-item-content">
+                            <a class="order-item-title" href="#">Grilled Beef with Sweet Potatoes</a>
+                            <div class="order-item-meta">x 9 • 75,000 đ</div>
+                            <div class="order-item-macros">Protein 32g • Carbs 38g • Fat 14g</div>
+                            <div class="order-item-total">Total : <span class="money">675,000 đ</span></div>
+                          </div>
+                        </div>
+                        <div class="order-item">
+                          <div class="avatar"><img src="../../Product/images/mi_ca_basa.png" alt="Basa Fish Noodles"></div>
+                          <div class="order-item-content">
+                            <a class="order-item-title" href="#">Basa Fish Noodles</a>
+                            <div class="order-item-meta">x 5 • 70,000 đ</div>
+                            <div class="order-item-macros">Protein 26g • Carbs 48g • Fat 13g</div>
+                            <div class="order-item-total">Total : <span class="money">350,000 đ</span></div>
+                          </div>
+                        </div>
+                        <div class="shipping-box">
+                          <div class="shipping-title">
+                            <span>Delivery Information</span>
+                            <span>•</span>
+                            <a href="#">Ngô Viết Thanh</a>
+                          </div>
+                          <div class="shipping-subtitle">Company information not available</div>
+                          <div class="shipping-address">Bcons Green Topaz Apartment, Dong Hoa, Di An, TP.HCM</div>
+                        </div>
+                        <div class="order-tools">
+                          <span>▣ Archive</span>
+                          <span>🖨️ Print order</span>
+                          <button class="link-action" type="button" data-modal-target="modal-cancel" data-order="#10032">
+                            ⨂ Cancel order
+                          </button>
+                        </div>
+                      </div>
+                      <div class="notes-box">
+                        <div>
+                          <label for="note-field">Note</label>
+                          <textarea id="note-field" placeholder="Enter a note..."></textarea>
+                        </div>
+                        <div>
+                          <div class="notes-header">
+                            <label for="tag-field">Tags</label>
+                            <a href="#">All tags</a>
+                          </div>
+                          <input id="tag-field" placeholder="Search tags" />
+                        </div>
+                        <div class="notes-actions">
+                          <button class="btn">Save note and tags</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="footer-actions">
+                      <button class="btn secondary" type="button" data-modal-target="modal-confirm" data-order="#10032">
+                        Confirm order
+                      </button>
+                      <button class="btn primary" type="button" data-modal-target="modal-delivery" data-order="#10032">
+                        Delivery
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 2 -->
+                <tr class="order-row">
+                  <td class="row-toggle" data-expanded="false">▸</td>
+                  <td><a href="#10031">#10031</a></td>
+                  <td>09/10/2025 09:30 CH</td>
+                  <td>Nguyễn Quốc Thịnh</td>
+                  <td><span class="pill pending">Unpaid</span></td>
+                  <td><span class="pill pending">Unfulfilled</span></td>
+                  <td></td>
+                  <td>18</td>
+                  <td class="money">1,430,000 đ</td>
+                </tr>
+                <tr class="order-details">
+                  <td></td>
+                  <td colspan="8">
+                    <div class="shipping-wrap">
+                      <div>
+                        <div class="order-item">
+                          <div class="avatar"><img src="../../Product/images/bo_nuong_khoai_lang.png" alt="Grilled Beef with Sweet Potatoes"></div>
+                          <div class="order-item-content">
+                            <a class="order-item-title" href="#">Grilled Beef with Sweet Potatoes</a>
+                            <div class="order-item-meta">x 10 • 75,000 đ</div>
+                            <div class="order-item-macros">Protein 32g • Carbs 38g • Fat 14g</div>
+                            <div class="order-item-total">Total : <span class="money">750,000 đ</span></div>
+                          </div>
+                        </div>
+                        <div class="order-item">
+                          <div class="avatar"><img src="../../Product/images/ca_hoi_rau_cu.png" alt="Salmon with Steamed Vegetables"></div>
+                          <div class="order-item-content">
+                            <a class="order-item-title" href="#">Salmon with Steamed Vegetables</a>
+                            <div class="order-item-meta">x 8 • 85,000 đ</div>
+                            <div class="order-item-macros">Protein 28g • Carbs 24g • Fat 12g</div>
+                            <div class="order-item-total">Total : <span class="money">680,000 đ</span></div>
+                          </div>
+                        </div>
+                        <div class="shipping-box">
+                          <div class="shipping-title">
+                            <span>Delivery Information</span>
+                            <span>•</span>
+                            <a href="#">Nguyễn Quốc Thịnh</a>
+                          </div>
+                          <div class="shipping-subtitle">Company information not available</div>
+                          <div class="shipping-address">88 Nguyễn Du, Quận 1, TP.HCM</div>
+                        </div>
+                        <div class="order-tools">
+                          <span>▣ Archive</span>
+                          <span>🖨️ Print order</span>
+                          <button class="link-action" type="button" data-modal-target="modal-cancel" data-order="#10031">
+                            ⨂ Cancel order
+                          </button>
+                        </div>
+                      </div>
+                      <div class="notes-box">
+                        <div>
+                          <label for="note-field-10031">Note</label>
+                          <textarea id="note-field-10031" placeholder="Enter a note..."></textarea>
+                        </div>
+                        <div>
+                          <div class="notes-header">
+                            <label for="tag-field-10031">Tags</label>
+                            <a href="#">All tags</a>
+                          </div>
+                          <input id="tag-field-10031" placeholder="Search tags" />
+                        </div>
+                        <div class="notes-actions">
+                          <button class="btn">Save note and tags</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="footer-actions">
+                      <button class="btn secondary" type="button" data-modal-target="modal-confirm" data-order="#10031">
+                        Confirm order
+                      </button>
+                      <button class="btn primary" type="button" data-modal-target="modal-delivery" data-order="#10031">
+                        Delivery
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 3 -->
+                <tr class="order-row">
+                  <td class="row-toggle" data-expanded="false">▸</td>
+                  <td><a href="#10030">#10030</a></td>
+                  <td>09/10/2025 09:42 CH</td>
+                  <td>Trần Quốc Hào</td>
+                  <td><span class="pill pending">Unpaid</span></td>
+                  <td><span class="pill pending">Unfulfilled</span></td>
+                  <td></td>
+                  <td>32</td>
+                  <td class="money">2,418,000 đ</td>
+                </tr>
+                <tr class="order-details">
+                  <td></td>
+                  <td colspan="8">
+                    <div class="shipping-wrap">
+                      <div>
+                        <div class="order-item">
+                          <div class="avatar"><img src="../../Product/images/ga_sot_cajun_cu_den.png" alt="Cajun Chicken with Beetroot"></div>
+                          <div class="order-item-content">
+                            <a class="order-item-title" href="#">Cajun Chicken with Beetroot</a>
+                            <div class="order-item-meta">x 14 • 75,000 đ</div>
+                            <div class="order-item-macros">Protein 33g • Carbs 36g • Fat 11g</div>
+                            <div class="order-item-total">Total : <span class="money">1,050,000 đ</span></div>
+                          </div>
+                        </div>
+                        <div class="order-item">
+                          <div class="avatar"><img src="../../Product/images/mi_ga_sot_cajun.png" alt="Cajun Chicken Noodles"></div>
+                          <div class="order-item-content">
+                            <a class="order-item-title" href="#">Cajun Chicken Noodles</a>
+                            <div class="order-item-meta">x 6 • 78,000 đ</div>
+                            <div class="order-item-macros">Protein 31g • Carbs 43g • Fat 10g</div>
+                            <div class="order-item-total">Total : <span class="money">468,000 đ</span></div>
+                          </div>
+                        </div>
+                        <div class="order-item">
+                          <div class="avatar"><img src="../../Product/images/ca_ngu_khoai_bap.png" alt="Tuna with Corn and Potatoes"></div>
+                          <div class="order-item-content">
+                            <a class="order-item-title" href="#">Tuna with Corn and Potatoes</a>
+                            <div class="order-item-meta">x 12 • 75,000 đ</div>
+                            <div class="order-item-macros">Protein 29g • Carbs 35g • Fat 9g</div>
+                            <div class="order-item-total">Total : <span class="money">900,000 đ</span></div>
+                          </div>
+                        </div>
+                        <div class="shipping-box">
+                          <div class="shipping-title">
+                            <span>Delivery Information</span>
+                            <span>•</span>
+                            <a href="#">Trần Quốc Hào</a>
+                          </div>
+                          <div class="shipping-subtitle">Company information not available</div>
+                          <div class="shipping-address">12 Trần Não, Thành phố Thủ Đức, TP.HCM</div>
+                        </div>
+                        <div class="order-tools">
+                          <span>▣ Archive</span>
+                          <span>🖨️ Print order</span>
+                          <button class="link-action" type="button" data-modal-target="modal-cancel" data-order="#10030">
+                            ⨂ Cancel order
+                          </button>
+                        </div>
+                      </div>
+                      <div class="notes-box">
+                        <div>
+                          <label for="note-field-10030">Note</label>
+                          <textarea id="note-field-10030" placeholder="Enter a note..."></textarea>
+                        </div>
+                        <div>
+                          <div class="notes-header">
+                            <label for="tag-field-10030">Tags</label>
+                            <a href="#">All tags</a>
+                          </div>
+                          <input id="tag-field-10030" placeholder="Search tags" />
+                        </div>
+                        <div class="notes-actions">
+                          <button class="btn">Save note and tags</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="footer-actions">
+                      <button class="btn secondary" type="button" data-modal-target="modal-confirm" data-order="#10030">
+                        Confirm order
+                      </button>
+                      <button class="btn primary" type="button" data-modal-target="modal-delivery" data-order="#10030">
+                        Delivery
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 4 -->
+                <tr class="order-row">
+                  <td class="row-toggle" data-expanded="false">▸</td>
+                  <td><a href="#10029">#10029</a></td>
+                  <td>09/10/2025 10:27 CH</td>
+                  <td>Huỳnh Vĩ Khôi</td>
+                  <td><span class="pill paid">Paid</span></td>
+                  <td><span class="pill pending">Unfulfilled</span></td>
+                  <td></td>
+                  <td>37</td>
+                  <td class="money">2,738,000 đ</td>
+                </tr>
+                <tr class="order-details">
+                  <td></td>
+                  <td colspan="8">
+                    <div class="shipping-wrap">
+                      <div>
+                        <div class="order-item">
+                          <div class="avatar"><img src="../../Product/images/mi_ca_basa.png" alt="Basa Fish Noodles"></div>
+                          <div class="order-item-content">
+                            <a class="order-item-title" href="#">Basa Fish Noodles</a>
+                            <div class="order-item-meta">x 21 • 70,000 đ</div>
+                            <div class="order-item-macros">Protein 26g • Carbs 48g • Fat 13g</div>
+                            <div class="order-item-total">Total : <span class="money">1,470,000 đ</span></div>
+                          </div>
+                        </div>
+                        <div class="order-item">
+                          <div class="avatar"><img src="../../Product/images/mi_tom_Nhat.png" alt="Japanese Shrimp Noodles"></div>
+                          <div class="order-item-content">
+                            <a class="order-item-title" href="#">Japanese Shrimp Noodles</a>
+                            <div class="order-item-meta">x 10 • 80,000 đ</div>
+                            <div class="order-item-macros">Protein 27g • Carbs 45g • Fat 9g</div>
+                            <div class="order-item-total">Total : <span class="money">800,000 đ</span></div>
+                          </div>
+                        </div>
+                        <div class="order-item">
+                          <div class="avatar"><img src="../../Product/images/mi_ga_sot_cajun.png" alt="Cajun Chicken Noodles"></div>
+                          <div class="order-item-content">
+                            <a class="order-item-title" href="#">Cajun Chicken Noodles</a>
+                            <div class="order-item-meta">x 6 • 78,000 đ</div>
+                            <div class="order-item-macros">Protein 31g • Carbs 43g • Fat 10g</div>
+                            <div class="order-item-total">Total : <span class="money">468,000 đ</span></div>
+                          </div>
+                        </div>
+                        <div class="shipping-box">
+                          <div class="shipping-title">
+                            <span>Delivery Information</span>
+                            <span>•</span>
+                            <a href="#">Huỳnh Vĩ Khôi</a>
+                          </div>
+                          <div class="shipping-subtitle">Company information not available</div>
+                          <div class="shipping-address">562 Lê Văn Sỹ, Quận 3, TP.HCM</div>
+                        </div>
+                        <div class="order-tools">
+                          <span>▣ Archive</span>
+                          <span>🖨️ Print order</span>
+                          <button class="link-action" type="button" data-modal-target="modal-cancel" data-order="#10029">
+                            ⨂ Cancel order
+                          </button>
+                        </div>
+                      </div>
+                      <div class="notes-box">
+                        <div>
+                          <label for="note-field-10029">Note</label>
+                          <textarea id="note-field-10029" placeholder="Enter a note..."></textarea>
+                        </div>
+                        <div>
+                          <div class="notes-header">
+                            <label for="tag-field-10029">Tags</label>
+                            <a href="#">All tags</a>
+                          </div>
+                          <input id="tag-field-10029" placeholder="Search tags" />
+                        </div>
+                        <div class="notes-actions">
+                          <button class="btn">Save note and tags</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="footer-actions">
+                      <button class="btn secondary" type="button" data-modal-target="modal-confirm" data-order="#10029">
+                        Confirm order
+                      </button>
+                      <button class="btn primary" type="button" data-modal-target="modal-delivery" data-order="#10029">
+                        Delivery
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="table-summary">Total : 43</div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+  <!-- Cancel order modal -->
+  <div class="modal" id="modal-cancel" aria-hidden="true">
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-cancel-title">
+      <header class="modal__header">
+        <h3 id="modal-cancel-title">Cancel order</h3>
+        <button class="modal__close" type="button" aria-label="Close" data-modal-close>×</button>
+      </header>
+      <div class="modal__body">
+        <div class="modal__notice">
+          Fit Meal suggests canceling the order for reasons such as fraudulent activity, a change of mind from the customer, or if an item is out of stock.<br />
+          Please be aware that an order, once canceled, cannot be restored.
+        </div>
+        <div class="form-group">
+          <label for="cancel-reason">Reason for canceling the order</label>
+          <select id="cancel-reason">
+            <option value="" selected>Select a reason</option>
+            <option value="change">Customer changed their mind</option>
+            <option value="stockout">Item out of stock</option>
+            <option value="fraud">Fraudulent order</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cancel-note">Note</label>
+          <textarea id="cancel-note" rows="3" placeholder="Add additional notes..."></textarea>
+        </div>
+      </div>
+      <footer class="modal__footer">
+        <button class="btn secondary" type="button" data-modal-close>No</button>
+        <button class="btn primary" type="button" data-modal-confirm="cancel">Cancel order</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Confirm order modal -->
+  <div class="modal" id="modal-confirm" aria-hidden="true">
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-confirm-title">
+      <header class="modal__header">
+        <h3 id="modal-confirm-title">Verify order</h3>
+        <button class="modal__close" type="button" aria-label="Close" data-modal-close>×</button>
+      </header>
+      <div class="modal__body">
+        <p>Confirm order <strong data-order-placeholder>#10032</strong> ?</p>
+      </div>
+      <footer class="modal__footer">
+        <button class="btn secondary with-icon" type="button" data-modal-close>
+          <span class="btn-icon">×</span>
+          Cancel
+        </button>
+        <button class="btn primary with-icon" type="button" data-modal-confirm="confirm">
+          <span class="btn-icon">✔</span>
+          Continue
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Delivery modal -->
+  <div class="modal" id="modal-delivery" aria-hidden="true">
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-delivery-title">
+      <header class="modal__header">
+        <h3 id="modal-delivery-title">Delivery</h3>
+        <button class="modal__close" type="button" aria-label="Đóng" data-modal-close>×</button>
+      </header>
+      <div class="modal__body">
+        <p>Ship order <strong data-order-placeholder>#10032</strong> ?</p>
+      </div>
+      <footer class="modal__footer">
+        <button class="btn secondary with-icon" type="button" data-modal-close>
+          <span class="btn-icon">×</span>
+          Cancel
+        </button>
+        <button class="btn primary with-icon" type="button" data-modal-confirm="delivery">
+          <span class="btn-icon">✔</span>
+          Continue
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="../js/order.js" defer></script>
+</body>
+</html>
