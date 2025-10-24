@@ -1,3 +1,4 @@
+// Khi DOM đã sẵn sàng
 document.addEventListener("DOMContentLoaded", () => {
   const chartCanvas = document.getElementById("report-chart");
   const tbody = document.getElementById("report-body");
@@ -6,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const legendLabel = document.getElementById("legend-label");
   const filterTags = document.getElementById("filter-tags");
   const changeHandlers = [reportRange, comparisonRange];
+
+  // Bảng màu dùng cho biểu đồ
   const palette = {
     primary: "#FEB9A5",
     primaryDark: "#FF5D2D",
@@ -16,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mutedRgb: "191, 108, 86",
   };
 
+  // Dữ liệu theo phạm vi báo cáo (đã Việt hoá nhãn)
   const datasetMap = {
     "this-month": {
       label: "01/10/2025 - 31/10/2025",
@@ -34,33 +38,34 @@ document.addEventListener("DOMContentLoaded", () => {
       ],
     },
     "this-quarter": {
-      label: "Q4 2025",
+      label: "Quý 4 năm 2025",
       data: [
-        { date: "October", orders: 74, revenue: 205463000, discount: 3400000, net: 202063000, shipping: 2160000, shippingDiscount: 200000, total: 200003000, paid: 200003000 },
-        { date: "November", orders: 82, revenue: 228710000, discount: 2800000, net: 225910000, shipping: 1750000, shippingDiscount: 320000, total: 224840000, paid: 224840000 },
-        { date: "December", orders: 95, revenue: 268900000, discount: 4200000, net: 264700000, shipping: 2100000, shippingDiscount: 450000, total: 262250000, paid: 262250000 },
+        { date: "Tháng 10", orders: 74, revenue: 205463000, discount: 3400000, net: 202063000, shipping: 2160000, shippingDiscount: 200000, total: 200003000, paid: 200003000 },
+        { date: "Tháng 11", orders: 82, revenue: 228710000, discount: 2800000, net: 225910000, shipping: 1750000, shippingDiscount: 320000, total: 224840000, paid: 224840000 },
+        { date: "Tháng 12", orders: 95, revenue: 268900000, discount: 4200000, net: 264700000, shipping: 2100000, shippingDiscount: 450000, total: 262250000, paid: 262250000 },
       ],
     },
     "this-year": {
-      label: "Year 2025",
+      label: "Năm 2025",
       data: [
-        { date: "Q1", orders: 210, revenue: 580000000, discount: 9200000, net: 570800000, shipping: 5400000, shippingDiscount: 900000, total: 565200000, paid: 565200000 },
-        { date: "Q2", orders: 245, revenue: 640000000, discount: 11000000, net: 629000000, shipping: 6100000, shippingDiscount: 1100000, total: 623900000, paid: 623900000 },
-        { date: "Q3", orders: 260, revenue: 705000000, discount: 12500000, net: 692500000, shipping: 6800000, shippingDiscount: 1400000, total: 684100000, paid: 684100000 },
-        { date: "Q4", orders: 310, revenue: 830000000, discount: 15000000, net: 815000000, shipping: 7200000, shippingDiscount: 1600000, total: 807800000, paid: 807800000 },
+        { date: "Quý 1", orders: 210, revenue: 580000000, discount: 9200000, net: 570800000, shipping: 5400000, shippingDiscount: 900000, total: 565200000, paid: 565200000 },
+        { date: "Quý 2", orders: 245, revenue: 640000000, discount: 11000000, net: 629000000, shipping: 6100000, shippingDiscount: 1100000, total: 623900000, paid: 623900000 },
+        { date: "Quý 3", orders: 260, revenue: 705000000, discount: 12500000, net: 692500000, shipping: 6800000, shippingDiscount: 1400000, total: 684100000, paid: 684100000 },
+        { date: "Quý 4", orders: 310, revenue: 830000000, discount: 15000000, net: 815000000, shipping: 7200000, shippingDiscount: 1600000, total: 807800000, paid: 807800000 },
       ],
     },
   };
 
   let chartInstance = null;
 
+  // Vẽ biểu đồ cột đơn giản bằng canvas (không dùng thư viện ngoài)
   const ensureChart = () => {
     if (!chartCanvas) return null;
     const context = chartCanvas.getContext("2d");
     if (!context) return null;
 
     if (chartInstance) {
-      chartInstance.destroy();
+      chartInstance.destroy?.();
     }
 
     const { data, label } = datasetMap[reportRange.value] || datasetMap["this-month"];
@@ -69,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     legendLabel.textContent = label;
 
-    // Fallback chart rendering without external libs (simple column visualization)
     const width = (chartCanvas.width = chartCanvas.clientWidth || 800);
     const height = (chartCanvas.height = chartCanvas.clientHeight || 360);
     const padding = 48;
@@ -82,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const barWidth = (width - padding * 2) / values.length - 36;
     const axisY = height - padding;
 
-    // Draw axes
+    // Trục
     context.strokeStyle = `rgba(${palette.mutedRgb}, 0.35)`;
     context.lineWidth = 1;
     context.beginPath();
@@ -91,14 +95,15 @@ document.addEventListener("DOMContentLoaded", () => {
     context.lineTo(width - padding + 12, axisY);
     context.stroke();
 
-    // Y-axis ticks
+    // Vạch chia trục Y
     const steps = 4;
     context.fillStyle = `rgba(${palette.mutedRgb}, 0.72)`;
     context.font = "13px Inter, sans-serif";
     for (let i = 0; i <= steps; i += 1) {
       const value = (maxValue / steps) * i;
       const y = axisY - (value / maxValue) * (axisY - padding);
-      context.fillText(`${Math.round(value / 1000000)}M`, padding - 28, y + 4);
+      const labelText = `${Math.round(value / 1_000_000).toLocaleString("vi-VN")} triệu`;
+      context.fillText(labelText, padding - 52, y + 4);
       context.strokeStyle = `rgba(${palette.mutedRgb}, 0.22)`;
       context.beginPath();
       context.moveTo(padding, y);
@@ -106,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       context.stroke();
     }
 
-    // Draw bars
+    // Cột
     values.forEach((value, index) => {
       const x = padding + index * (barWidth + 36) + 36;
       const barHeight = (value / maxValue) * (axisY - padding);
@@ -122,15 +127,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       context.shadowBlur = 0;
       context.fillStyle = `rgba(${palette.mutedRgb}, 0.8)`;
-      context.fillText(labels[index], x + barWidth / 2 - 24, axisY + 24);
+      context.textAlign = "center";
+      context.fillText(labels[index], x + barWidth / 2, axisY + 24);
     });
 
     return { context, labels, values };
   };
 
+  // Định dạng tiền tệ VND
   const formatCurrency = (value) =>
-    `${Number(value).toLocaleString("en-US")} ₫`;
+    `${Number(value).toLocaleString("vi-VN")} ₫`;
 
+  // Render bảng dữ liệu
   const renderTable = () => {
     const { data } = datasetMap[reportRange.value] || datasetMap["this-month"];
     tbody.innerHTML = "";
@@ -152,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  // Sắp xếp dữ liệu theo cột
   const applySorting = (field, direction) => {
     const dataset = datasetMap[reportRange.value];
     if (!dataset) return;
@@ -168,6 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let activeSortField = null;
   let activeSortDirection = "asc";
 
+  // Bắt sự kiện click tiêu đề cột để sắp xếp
   const tableHeaders = document.querySelectorAll(".report-table th");
   tableHeaders.forEach((th) => {
     th.addEventListener("click", () => {
@@ -193,6 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Thay đổi phạm vi và so sánh -> cập nhật biểu đồ + bảng
   changeHandlers.forEach((control) => {
     control.addEventListener("change", () => {
       if (control === reportRange) {
@@ -204,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (control === comparisonRange && !filterTags.childElementCount) {
         filterTags.innerHTML = `
           <button class="tag" data-filter="status">
-            Order status is not Cancelled
+            Trạng thái đơn hàng không phải Đã hủy
             <span class="tag-remove" aria-hidden="true">×</span>
           </button>
         `;
@@ -215,12 +226,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Xoá tag bộ lọc khi nhấp vào
   filterTags.addEventListener("click", (event) => {
     const button = event.target.closest(".tag");
     if (!button) return;
     button.remove();
   });
 
+  // Khởi tạo
   ensureChart();
   renderTable();
 });

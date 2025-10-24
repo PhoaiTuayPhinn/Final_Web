@@ -1,11 +1,67 @@
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = Array.from(document.querySelectorAll(".tab"));
   const toggles = Array.from(document.querySelectorAll(".row-toggle"));
+  const orderRows = Array.from(document.querySelectorAll(".order-row"));
+  const tableSummary = document.querySelector("[data-table-summary]");
+
+  const setRowExpanded = (row, expanded) => {
+    if (!row) return;
+    const toggle = row.querySelector(".row-toggle");
+    const detailRow = row.nextElementSibling;
+
+    row.classList.toggle("is-open", expanded);
+
+    if (toggle) {
+      toggle.dataset.expanded = String(expanded);
+      toggle.textContent = expanded ? "▾" : "▸";
+    }
+
+    if (detailRow && detailRow.classList.contains("order-details")) {
+      detailRow.classList.toggle("is-open", expanded);
+    }
+  };
+
+  const filterPredicates = {
+    all: () => true,
+    undelivered: (row) =>
+      row.dataset.fulfillment === "pending" && row.dataset.payment === "paid",
+    "awaiting-payment": (row) => row.dataset.payment === "pending",
+  };
+
+  const applyFilter = (filterKey) => {
+    const predicate = filterPredicates[filterKey] || filterPredicates.all;
+    let visibleCount = 0;
+
+    orderRows.forEach((row) => {
+      const matches = predicate(row);
+      const detailRow = row.nextElementSibling;
+
+      if (matches) {
+        row.hidden = false;
+        if (detailRow && detailRow.classList.contains("order-details")) {
+          detailRow.hidden = false;
+        }
+        visibleCount += 1;
+      } else {
+        setRowExpanded(row, false);
+        row.hidden = true;
+        if (detailRow && detailRow.classList.contains("order-details")) {
+          detailRow.hidden = true;
+        }
+      }
+    });
+
+    if (tableSummary) {
+      tableSummary.textContent = `Tổng: ${visibleCount} đơn`;
+    }
+  };
 
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       tabs.forEach((item) => item.classList.remove("active"));
       tab.classList.add("active");
+      const filterKey = tab.dataset.tabTarget || "all";
+      applyFilter(filterKey);
     });
   });
 
@@ -24,22 +80,13 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const syncState = (expanded) => {
-      row.classList.toggle("is-open", expanded);
-      toggle.dataset.expanded = String(expanded);
-      toggle.textContent = expanded ? "▾" : "▸";
-      if (detailRow && detailRow.classList.contains("order-details")) {
-        detailRow.classList.toggle("is-open", expanded);
-      }
-    };
-
     // Initialize state based on markup
     const initiallyExpanded = toggle.dataset.expanded === "true" || row.classList.contains("is-open");
-    syncState(initiallyExpanded);
+    setRowExpanded(row, initiallyExpanded);
 
     toggle.addEventListener("click", () => {
       const expanded = toggle.dataset.expanded === "true";
-      syncState(!expanded);
+      setRowExpanded(row, !expanded);
     });
   });
 
@@ -153,4 +200,8 @@ document.addEventListener("DOMContentLoaded", () => {
       closeModal(activeModal);
     }
   });
+
+  const activeTab = document.querySelector(".tab.active");
+  const defaultFilter = activeTab ? activeTab.dataset.tabTarget || "all" : "all";
+  applyFilter(defaultFilter);
 });
