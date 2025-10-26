@@ -334,6 +334,22 @@ main.layout {
   width: 40%;
 }
 
+.product-table th:nth-child(4),
+.product-table th:nth-child(5),
+.product-table th:nth-child(6),
+.product-table td:nth-child(4),
+.product-table td:nth-child(5),
+.product-table td:nth-child(6) {
+  white-space: nowrap;
+}
+
+.product-table td:nth-child(5) {
+  text-align: center;
+}
+.product-table td:nth-child(6) {
+  text-align: center;
+}
+
 .product-cell {
   padding-left: 12px;
 }
@@ -367,6 +383,8 @@ main.layout {
 .money {
   font-weight: 600;
   color: var(--ink);
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .status-pill {
